@@ -1,0 +1,36 @@
+<form [formGroup] ='form'>
+    <div class="form-group">
+        <label for="username">Username</label>
+        <input 
+            formControlName ='userid'
+            id="username" 
+            type="text" 
+            class="form-control">
+            <div *ngIf = "userid.pending"> Cheking is inprogress...</div>
+            <div class="alert alert-danger" *ngIf='userid.touched && userid.invalid'> 
+                   <div *ngIf="userid.errors.required">pls enter the user name.!</div> 
+                   <div *ngIf="userid.errors.minlength">pls enter >3 </div> 
+                   <div *ngIf="userid.errors.cannotContainSpace">do enter correctly</div>
+                   <div *ngIf="userid.errors.mustbeUnique">{{userid.errors.mustbeUnique}} </div>
+            </div>
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input 
+            formControlName='pwd'
+            id="password" 
+            type="password" 
+            class="form-control">
+            <div class="alert alert-danger" *ngIf='pwd.touched && pwd.invalid' > pls enter the password.!</div>
+    </div>
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+    <div>
+        <input class = "form-control" type="text" (keyup.enter) = "addPermission(permission)" #permission>
+        <ul class="list-group">
+            <li 
+            class="list-group-item" *ngFor = "let eachPermission of permissions.controls" >
+            {{eachPermission.value}}
+        </li>
+        </ul>
+    </div>
+</form>
